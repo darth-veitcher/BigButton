@@ -14,7 +14,9 @@ import (
 func PressKey(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	robotgo.KeyTap(params["key"])
-	json.NewEncoder(w).Encode("Pressed " + params["key"])
+	msg := "Pressed " + params["key"]
+	json.NewEncoder(w).Encode(msg)
+	log.Println(msg)
 }
 
 // Click via "Mouse" in robotgo
@@ -22,7 +24,9 @@ func PressKey(w http.ResponseWriter, req *http.Request) {
 func Click(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	robotgo.MouseClick(params["key"])
-	json.NewEncoder(w).Encode("Pressed " + params["key"])
+	msg := "Clicked " + params["key"]
+	json.NewEncoder(w).Encode(msg)
+	log.Println(msg)
 }
 
 // CaptureScreen via "Bitmap" in robotgo
@@ -32,7 +36,9 @@ func CaptureScreen(w http.ResponseWriter, req *http.Request) {
 	defer robotgo.FreeBitmap(bitmap)
 	filename := "test.png"
 	robotgo.SaveBitmap(bitmap, filename)
-	json.NewEncoder(w).Encode("Captured screen")
+	msg := "Captured Screen"
+	json.NewEncoder(w).Encode(msg)
+	log.Println(msg)
 }
 
 func main() {
